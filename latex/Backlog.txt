@@ -1,0 +1,61 @@
+[1]       R. W. Erickson and D. Maksimovic, Fundamentals of Power Electronics, Second. Springer, 2001, p. 912.
+
+[2]       R. Blanchard and R. Severns, “MOSFETs move in on low voltage rectification,” in Official Proceedings of the Ninth International PCI, 1984, vol. 84, pp. 29–31.
+
+[3]       D. Reusch and J. Glaser, DC-DC Converter Handbook - A Supplement to GaN Transistors for Efficient Power Conversion, 1st ed. Power Conversion Publications, 2015, ISBN 978-0-9966492-0-9.
+
+[4]       J. Glaser, J. Strydom, and D. Reusch, “High Power Fully Regulated Eighth-brick DC-DC Converter with GaN FETs,” in PCIM Europe 2015; International Exhibition and Conference for Power Electronics, Intelligent Motion, Renewable Energy and Energy Management; Proceedings of, 2015, pp. 406–413.
+
+[5]       J. Strydom and D. Reusch, “eGaN® FET-Silicon Power Shoot Out Volume 12: Optimizing Dead Time,” Power Electronics - Penton Electronics Group, Jan. 2013.
+
+[6]       A. Lidow, J. Strydom, M. de Rooij, and D. Reusch, GaN Transistors for Efficient Power Conversion, 2nd ed. Wiley, 2014, ISBN 978-1-118-84476-2.
+
+[7]       C. Mößlacher and O. Guillemant, “Improving Efficiency of Synchronous Rectification by Analysis of the MOSFET Power Loss Mechanism,” Infineon Technologies, Mar. 2012.
+
+[8]       X. Kang, A. Caiafa, E. Santi, J. L. Hudgins, and P. R. Palmer, “Parameter extraction for a power diode circuit simulator model including temperature dependent effects,” IEEE Applied Power Electronics Conference and Exposition (APEC), March 2002, Vol. 1, pp. 452–458.
+
+[9]       P. O. Lauritzen and C. L. Ma, “A simple diode model with reverse recovery, ”Power Electronics, IEEE Transactions on, vol. 6, no. 2, pp. 188–191, Apr. 1991.
+
+[10]     D. Reusch, J. Strydom, and A. Lidow, “Thermal Evaluation of Chip–Scale Packaged Gallium Nitride Transistors,” IEEE Applied Power Electronics Conference and Exposition (APEC), March 2016, pp. 587–594.
+
+
+
+
+
+\section{Fonte chaveada de referência}
+O objetivo é comparar as propriedades dos dispositivos e como eles afetam uma dada fonte chaveada de referência. O controle da fonte deverá permanecer o mesmo durante a comparação ou até mesmo não ser utilizado. Pode-se analisar a fonte apenas com carga resistiva e em regime permanente. Como exemplo, utilizei um circuito elevador de tensão (boost) bastante simples e sem controle. O circuito está na Figura \ref{FigCircuit} e foi simulado no LTSpice, da Analog Devices \cite{ltspice}.
+\begin{figure}[H]
+\caption{Circuito de referência: Boost}
+ \centering % para centralizarmos a figura
+\includegraphics[width=14cm]{figuras/1.JPG} 
+\label{FigCircuit}
+\end{figure}
+\noindent O circuito superior da Figura \ref{FigCircuit} utiliza uma chave simples no lugar de um transistor, com $R_{DS_{(on)}}$ de um transistor GaN comercial. O circuito da parte de baixo da mesma figura, utiliza um $R_{DS_{(on)}}$ de um transistor Mosfet baseado em Silício.\par
+\noindent Na figura \ref{FigCircuitVoutIout}, temos a saída dos dois circuitos, $V_{(out)}$ e $I_{(out)}$. Nota-se um grande \textit{overshoot}, dado que não há controle.
+\begin{figure}[H]
+\caption{Circuito de referência: Tensões e correntes de saída}
+ \centering % para centralizarmos a figura
+\includegraphics[width=14cm]{figuras/2.JPG} 
+\label{FigCircuitVoutIout}
+\end{figure}
+\noindent Pode-se, então, comparar os rendimentos dos circuitos, baseados apenas nessa característica, $R_{DS_{(on)}}$. Na Figura \ref{FigCircuitEff}, há o calculo feito pelo software. 
+\begin{figure}[H]
+\caption{Circuito de referência: Comparação da eficiência}
+ \centering % para centralizarmos a figura
+\includegraphics[width=8cm]{figuras/3.JPG} 
+\label{FigCircuitEff}
+\end{figure}
+\noindent A eficiência desse \textit{Boost} utilizado GaN é de $91,607\%$, enquanto com Silício é de $90,67\%$. Embora pareça pouco a diferença de $~1\%$, deve-se notar que este é um circuito elevador de $5V$ para $10V$, com corrente $I_o$ médio de apenas $0,5A$. Para escalas maiores de potência, $kW$ ou até $MW$, as perdas serão muito maiores.
+
+\section{Oportunidades de publicação}
+As pesquisas feitas através do site da IEEE (Journals: \textit{IEEE Transactions on Power Electronics} e \textit{IEEE Journal of Emerging and Selected Topics in Power Electronics}) mostraram que GaN é um tópico que vem crescendo ao longo dos anos, porém ainda com pouco número de publicações. No grafico da Figura \ref{FigPublications}, há o número de publicações, por ano, no IEEE, nos \textit{journals} citados acima. Na revista da Sobraep só foram encontrados dois artigos sobre o tema. 
+\begin{figure}[H]
+\caption{Número de publicações com os termos "GaN Hemt", por ano}
+ \centering % para centralizarmos a figura
+\includegraphics[width=14cm]{figuras/IEEE_Graf.JPG}
+\label{FigPublications}
+\end{figure}
+\noindent O número crescente de publicações, indica que o interesse nesse tipo de dispositivo semicondutor cresce na mesma medida. Alguns artigos servirão de norte para este projeto: \cite{Chu}, \cite{Huang}, \cite{mitova}.
+
+
+

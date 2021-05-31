@@ -1,0 +1,48 @@
+\chapter{Plano de trabalho e cronograma}
+\label{chapterCronograma}
+\par Paragrafo explicando o cronograma.
+%adicionar algum comentario sobre a linha do tempo
+\begin{figure}[H]
+\caption{Cronograma} 
+\begin{center}
+\begin{circuitikz}
+%draw horizontal line
+\draw (0,0) -- (14,0);
+\draw [dashed](14,0) -- (15,0);
+%draw vertical lines
+\foreach \x in {0,1,3,5,7,10.5,14}
+\draw (\x cm,3pt) -- (\x cm,-3pt);
+
+%draw nodes
+\draw (0,0) node[below=3pt] {$ 2020 $} node[above=3pt] {$   $};
+\draw (1,0) node[below=3pt] {$  $} node[above=3pt] {$ I $};
+\draw (2,0) node[below=3pt] {$  $} node[above=3pt] {$  $};
+\draw (3,0) node[below=3pt] {$  $} node[above=3pt] {$ II $};
+\draw (4,0) node[below=3pt] {$  $} node[above=3pt] {$  $};
+\draw (5,0) node[below=3pt] {$  $} node[above=3pt] {$  $};
+\draw (6,0) node[below=3pt] {$  $} node[above=3pt] {$  $};
+\draw (7,0) node[below=3pt] {$ 2021 $} node[above=3pt] {$ III $};
+\draw (10.5,0) node[below=3pt] {$ 07/2021 $} node[above=3pt] {$ IV $};
+\draw (14,0) node[below=3pt] {$ 2022 $} node[above=3pt] {$ V $};
+\end{circuitikz}
+\end{center}
+\label{figCronograma}
+\end{figure}
+
+\par O cronograma da figura \ref{figCronograma} está detalhado a seguir:
+\renewcommand{\labelenumi}{\Roman{enumi}}
+ \begin{enumerate}
+   \item Início do programa
+   \item Disciplinas:
+    \begin{itemize}
+        \item IT505 - Fontes chaveadas
+        \item IE320 - Tópicos em Eletrônica I: Introdução a compatibilidade eletromagnética
+        \item IT302 - Eletronica de potência I
+        \item IT306 - Tópicos em Sistemas de Energia Elétrica III
+    \end{itemize}
+   \item Inicio das simulações e validações de modelos
+   \item Qualificação
+   \item Integração dos modelos simulados e apresentação da dissertação
+
+ \end{enumerate}
+ 

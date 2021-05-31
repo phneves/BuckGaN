@@ -1,0 +1,112 @@
+\chapter{Objetivos d trabalho}
+1. Introdução sobre o sistema que será simulado\\
+2. Diagrama de bloco da pisco de luz\\
+3. MPPT\\
+4. Simulação de Bateria - Estagios de carga de 18650\\
+5. Buck com GAN\\
+6. interessante não simular controle e sim apenas os 3 pontos importantes de carga: Fonte de corrente, Fonte de tensão\\
+7. Usar indutor acoplado para amostrar a corrente\\
+0. colocar primeiro: Estudar a relação de beneficios em se utilizar dispositivos GaN ao invés de Silício. Ainda avaliar, se possível, seu custo e viabilidade atuais, no contexto de fontes chaveadas. Especificamente podemos escolher uma topologia simples para base de comparação.
+
+\begin{center}
+\begin{circuitikz}
+%Coluna,Linha
+%(0,0) botton left
+\draw %painel solar
+    [dashed] (-1,-1)   to [short,i=] (6,-1)
+             (6,-1)   to [short] (6,5)
+             (6,5)   to [short] (-1,5)
+             (-1,5)   to [short] (-1,-1)
+            (3,-0.8) node[]{Painel Solar Fotovoltaico}
+;
+
+\draw %buck
+    [dashed] (7,-1)   to [short,i=] (12,-1)
+             (12,-1)  to [short] (12,5)
+             (12,5)   to [short] (7,5)
+             (7,5)   to [short] (7,-1)
+            (9.5,-0.8) node[]{Conversor Buck}
+;
+
+\draw %bat
+    [dashed] (13,-1)   to [short,i=] (15,-1)
+             (15,-1)  to [short] (15,5)
+             (15,5)   to [short] (13,5)
+             (13,5)   to [short] (13,-1)
+             (14,-0.8) node[]{Bateria}
+;
+
+
+        
+
+    
+\draw
+    (0,0)   to [short,-*] (6,0)
+    (3.5,4) to [R, l_=$R_s$] (5.5,4)
+    (5.5,4) to [short,-*] (6,4)
+    (0,0)   to [american current source, l_=$I_{pv}$] (0,4)
+    (0,4)   to [short] (3.5,4)
+    (1.5,4) to [short, *-, i=$I_d$] (1.5,3) 
+    (1.5,3) to [D] (1.5,1)
+    (1.5,1) to [short,-*] (1.5,0) 
+    (3,4)   to [R, *-*, l_=$R_p$] (3,0)
+    ; 
+\draw
+    %(6,0)   to [short,*-] (7,4)
+    %(7,4)   to [short,*-] (8,4)
+    (6,4)   to [short,*-] (8,4)
+    (8,4)   to [switch, l_=$GAN$] (10,4)
+    %(6,4)   to [short,*-] (7,0)
+    %(7,0)   to [short,*-] (14,0)
+    (6,0)   to [short,*-] (12,0)
+    (12,0)   to [short,*-*] (14,0) 
+    (8,0)   to [C,*-*] (8,4)
+    (10,0)  to [D,*-*] (10,4)
+    (10,4)  to [L,l_=$L$] (12,4) 
+    (12,4)   to [short,*-] (14,4) 
+    (14,4)  to [battery,-] (14,0)
+    node[ground]{}
+;
+    
+\end{circuitikz}
+\end{center}
+
+
+
+\section{Fonte chaveada de referência}
+O objetivo é comparar as propriedades dos dispositivos e como eles afetam uma dada fonte chaveada de referência. O controle da fonte deverá permanecer o mesmo durante a comparação ou até mesmo não ser utilizado. Pode-se analisar a fonte apenas com carga resistiva e em regime permanente. Como exemplo, utilizei um circuito elevador de tensão (boost) bastante simples e sem controle. O circuito está na Figura \ref{FigCircuit} e foi simulado no LTSpice, da Analog Devices \cite{ltspice}.
+\begin{figure}[H]
+\caption{Circuito de referência: Boost}
+ \centering % para centralizarmos a figura
+\includegraphics[width=14cm]{figuras/1.JPG} 
+\label{FigCircuit}
+\end{figure}
+\noindent O circuito superior da Figura \ref{FigCircuit} utiliza uma chave simples no lugar de um transistor, com $R_{DS_{(on)}}$ de um transistor GaN comercial. O circuito da parte de baixo da mesma figura, utiliza um $R_{DS_{(on)}}$ de um transistor Mosfet baseado em Silício.\par
+\noindent Na figura \ref{FigCircuitVoutIout}, temos a saída dos dois circuitos, $V_{(out)}$ e $I_{(out)}$. Nota-se um grande \textit{overshoot}, dado que não há controle.
+\begin{figure}[H]
+\caption{Circuito de referência: Tensões e correntes de saída}
+ \centering % para centralizarmos a figura
+\includegraphics[width=14cm]{figuras/2.JPG} 
+\label{FigCircuitVoutIout}
+\end{figure}
+\noindent Pode-se, então, comparar os rendimentos dos circuitos, baseados apenas nessa característica, $R_{DS_{(on)}}$. Na Figura \ref{FigCircuitEff}, há o calculo feito pelo software. 
+\begin{figure}[H]
+\caption{Circuito de referência: Comparação da eficiência}
+ \centering % para centralizarmos a figura
+\includegraphics[width=8cm]{figuras/3.JPG} 
+\label{FigCircuitEff}
+\end{figure}
+\noindent A eficiência desse \textit{Boost} utilizado GaN é de $91,607\%$, enquanto com Silício é de $90,67\%$. Embora pareça pouco a diferença de $~1\%$, deve-se notar que este é um circuito elevador de $5V$ para $10V$, com corrente $I_o$ médio de apenas $0,5A$. Para escalas maiores de potência, $kW$ ou até $MW$, as perdas serão muito maiores.
+
+\section{Oportunidades de publicação}
+As pesquisas feitas através do site da IEEE (Journals: \textit{IEEE Transactions on Power Electronics} e \textit{IEEE Journal of Emerging and Selected Topics in Power Electronics}) mostraram que GaN é um tópico que vem crescendo ao longo dos anos, porém ainda com pouco número de publicações. No grafico da Figura \ref{FigPublications}, há o número de publicações, por ano, no IEEE, nos \textit{journals} citados acima. Na revista da Sobraep só foram encontrados dois artigos sobre o tema. 
+\begin{figure}[H]
+\caption{Número de publicações com os termos "GaN Hemt", por ano}
+ \centering % para centralizarmos a figura
+\includegraphics[width=14cm]{figuras/IEEE_Graf.JPG}
+\label{FigPublications}
+\end{figure}
+\noindent O número crescente de publicações, indica que o interesse nesse tipo de dispositivo semicondutor cresce na mesma medida. Alguns artigos servirão de norte para este projeto: \cite{Chu}, \cite{Huang}, \cite{mitova}.
+
+
+
